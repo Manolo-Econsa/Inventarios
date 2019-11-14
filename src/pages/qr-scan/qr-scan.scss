@@ -1,0 +1,55 @@
+page-qr-scan {
+  .custom-alertDanger {
+    background-color: #F35E5D !important;
+    background: #F35E5D  !important;
+    color: red !important;
+    $alert-md-background-color: #F35E5D;
+    $alert-ios-background: #F35E5D;
+  }
+
+  .proquima{
+    background: color($colors, primary);
+    .label[floating],
+    .label[stacked],
+    .input-has-focus .label[floating] {
+      color: color($colors, primary) ;
+    }
+    
+    .principal{
+      border: 1px solid black;
+    }
+
+    ion-card{
+      border: 5px solid blue
+    }
+  }
+
+  .unhesa{
+    background: #ff6868;
+    .label[floating],
+    .label[stacked],
+    .input-has-focus .label[floating] {
+      color: color($colors, danger) ;
+    }
+
+    ion-card{
+      border: 5px solid red
+    }
+  }
+
+  .connection-true{
+    color: color($colors, secondary);
+  }
+
+  .connection-false{
+    color: color($colors, danger);
+  }
+
+  // .label[floating],
+  // .label[stacked],
+  // .input-has-focus .label[floating] {
+  //     color: color($colors, dark) ;
+  // }
+}
+
+

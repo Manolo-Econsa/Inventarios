@@ -1,0 +1,29 @@
+page-extraordinario {
+    .input-card{
+        border-bottom: 1px solid #dedede;
+    }
+
+    .false{
+      background: color($colors, primary);
+      .label[floating],
+      .label[stacked],
+      .input-has-focus .label[floating] {
+        color: color($colors, primary) ;
+      }
+      .cardUnic{
+        border: 5px solid blue
+      }
+    }
+    
+    .true{
+      background: #ff6868;
+      .label[floating],
+      .label[stacked],
+      .input-has-focus .label[floating] {
+        color: color($colors, danger) ;
+      }
+      .cardUnic{
+        border: 5px solid red
+      }
+    }
+}

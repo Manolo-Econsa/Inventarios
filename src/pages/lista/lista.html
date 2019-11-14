@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="etiquetas">
+        <div class="sticky">
+          <ion-searchbar
+          block placeholder="Buscar por {{busqueda}}" (ionInput)="getItems()" [(ngModel)]="searchTerm"></ion-searchbar>
+        </div>
+    </ion-title>
+    <ion-title *ngIf="!etiquetas">
+      Etiquetas Revisadas
+  </ion-title>
+  </ion-navbar>
+  <ion-fab bottom right edge #fab *ngIf="etiquetas">
+    <button ion-fab mini><ion-icon name="{{busquedaicon}}"></ion-icon></button>
+    <ion-fab-list>
+      <button ion-fab color="new" [ngClass]="{selected: busqueda == 'ID'}" (click)="buscar('ID','md-barcode')" (click)="fab.close()">
+        <ion-icon name="md-barcode"></ion-icon>
+        <ion-label>ID</ion-label>
+      </button>
+      <button ion-fab color="new" [ngClass]="{selected: busqueda == 'Descripción'}" (click)="buscar('Descripción','clipboard')" (click)="fab.close()">
+          <ion-icon name="clipboard"></ion-icon>
+          <ion-label>Descripción</ion-label>
+      </button>
+      <button ion-fab color="new" [ngClass]="{selected: busqueda == 'Numero Bodega'}" (click)="buscar('Numero Bodega','cube')" (click)="fab.close()">
+        <ion-icon name="cube"></ion-icon>
+        <ion-label>Numero Bodega</ion-label>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)" name="refresh">
+    <ion-refresher-content
+     pullingText="Tira para actualizar"
+     refreshingText="actualizando...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <p *ngIf="!etiquetas" style="text-align: center" >Aún no has hecho ningun conteo.</p>
+  <div *ngIf="etiquetas">
+    <ion-list> 
+      <ion-item *ngFor="let etiqueta of filterItems">
+        <p item-start>{{etiqueta.idConteo}}</p>
+        <p item-start> - </p>
+        <p item-center>{{ etiqueta.DescripcionSAP }}</p>
+        <strong item-end class="reconteo" *ngIf="etiqueta.idEstado == 3 || etiqueta.idEstado ==7 ">Reconteo</strong>
+        <button ion-button outline item-end (click)="ver(etiqueta.idConteo)">Ver</button>
+      </ion-item>
+      
+    </ion-list>
+  </div>
+</ion-content>

@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Hallazgos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding [class]="class">
+  <ion-card>
+    <form (ngSubmit)="regHallazgo()">
+      <ion-card-content>
+        <ion-item>
+          <ion-label floating>Descripción del Hallazgo</ion-label>
+          <ion-textarea #textarea class="input-card" rows="5" [(ngModel)]="descripcion" name="descripcion"></ion-textarea>
+        </ion-item>
+
+        <br> 
+
+        <button ion-button full round type="submit" [disabled]="!descripcion">Agregar Hallazgo</button>
+      </ion-card-content>
+    </form>
+  </ion-card>
+</ion-content>

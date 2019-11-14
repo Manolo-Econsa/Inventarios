@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title *ngIf="!etiquetaDeLista">Escaner</ion-title>
+    <ion-title *ngIf="etiquetaDeLista">Etiqueta No.{{etiquetaDeLista.idConteo}}</ion-title>
+    <ion-buttons end>
+      <button ion-fab mini [color]="mycolor" (click)="estado()" *ngIf="!etiquetaDeLista"><ion-icon name="ios-wifi"></ion-icon></button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding  [class]="empresaclass" >
+  <button ion-button round icon-end block  (click)="escanerQr()" *ngIf="!etiquetaDeLista" class="principal">
+    Escanear codigo QR
+    <ion-icon name="md-qr-scanner"></ion-icon>
+  </button>
+
+  <br>
+
+  <form (ngSubmit)="buscar()" id="busqueda" *ngIf="!etiquetaDeLista">
+    <ion-item style="border-radius: 20px !important">
+      <ion-input id="codigos" type="tel" placeholder="Codigo" [(ngModel)]="id" name="id"></ion-input>
+      <button  ion-button item-right icon-only small type="submit">
+        <ion-icon name="md-search"></ion-icon>
+      </button>
+    </ion-item>
+  </form>
+
+  <ion-card *ngIf="etiqueta" style="border-radius: 20px">
+
+    <ion-item>
+      <img src="{{ imagen }}" >
+    </ion-item>
+
+    <ion-card-content>
+      
+      <ion-item>
+        <h2>UDM:</h2>
+        <h3>{{etiqueta.UnidadDeMedida}}</h3>
+      </ion-item>
+
+      <ion-item text-wrap>
+        <h2>SAP:</h2>
+        <h3 *ngIf="etiqueta.CodigoSAP">Código: {{etiqueta.CodigoSAP}}</h3>
+        <h3 *ngIf="!etiqueta.CodigoSAP">Sin Código</h3>
+        <h3>Descripción: {{etiqueta.DescripcionSAP}}</h3>
+      </ion-item>
+      
+      <ion-item text-wrap>
+        <h2>Bodega:</h2>
+        <h3>{{etiqueta.CodigoBodega}} - {{etiqueta.NombreBodega}}</h3>
+      </ion-item>
+
+      <form (ngSubmit)="preRegistrar()" *ngIf="!etiquetaDeLista">
+        <ion-item>
+          <ion-label floating>Conteo:</ion-label>
+          <ion-input [(ngModel)]="conteo" name="conteo" type="tel" style="border-bottom: 1px solid #dedede;"></ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label floating>Observaciones:</ion-label>
+          <ion-input [(ngModel)]="observaciones" name="observaciones" type="text-area" style="border-bottom: 1px solid #dedede;"></ion-input>
+        </ion-item>
+        
+        <br>
+
+        <button ion-button block round only-icon outline [disabled]="mycolor == 'danger' || contado" [color]="empresacolor"
+        type="submit">
+          <ion-icon name="md-arrow-round-forward"></ion-icon>
+        </button>
+
+      </form>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

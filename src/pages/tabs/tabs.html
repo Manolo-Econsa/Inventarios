@@ -1,0 +1,8 @@
+<ion-tabs>
+  <ion-tab tabIcon="md-qr-scanner" tabTitle="QR" [root]="tab1" [rootParams]="{user:user,tabla:tabla}"></ion-tab>
+  <ion-tab tabIcon="md-list-box" tabTitle="Revisados" [root]="tab2" [rootParams]="{user:user,tabla:tabla}"
+  [tabBadge]="reconteo" tabBadgeStyle="danger"></ion-tab>
+  <ion-tab *ngIf="!random" tabIcon="filing" tabTitle="Bolestas Ext" [root]="tab3" [rootParams]="{user:user,tabla:tabla}"></ion-tab>
+  <ion-tab *ngIf="true" tabIcon="search" tabTitle="Hallazgo" [root]="tab4" [rootParams]="{user:user,tabla:tabla}"></ion-tab>
+</ion-tabs>`
+<!-- [rootParams] se utiliza para mandar los datos del usuario logueado -->

@@ -1,0 +1,29 @@
+<ion-content padding class="default-home" *ngIf="user">
+  <h1 class="titulo">Bienvenido {{user.Nombre}}</h1>
+  <p class="subtitulo">Selecciona el inventario a trabajar</p>
+
+  <div class="login">   
+
+    <form (ngSubmit)="entrar()" name="sesion">
+
+      <ion-item>
+        <ion-label floating color="new">Categoria</ion-label>
+        <ion-select [(ngModel)]="tipo" name="tipo" class="input-card" (ionChange)="getTablas()">
+          <ion-option *ngFor="let tipo of tipos" value="{{tipo.idCategoria}}">{{tipo.nombre}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item [hidden]="!tipo">
+        <ion-label floating color="new">Inventario</ion-label>
+        <ion-select [(ngModel)]="tabla" name="tabla" class="input-card">
+          <ion-option *ngFor="let tab of tablas" value="{{tab.idTabla}}">{{tab.tabla}}</ion-option>
+        </ion-select>
+      </ion-item>
+
+      <br>
+
+      <button round style="border: 2px solid black" ion-button type="submit" [disabled]="!tipo || !tabla" block>Empezar</button>   
+      <button round style="border: 2px solid black" ion-button type="reset" block (click)="cerrar()" color="danger">Cerrar Sesión</button>
+    </form>
+  </div>
+</ion-content>

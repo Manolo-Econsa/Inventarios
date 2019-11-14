@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Nuevas Etiquetas</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding [class]="empresaBorder">
+  <ion-card style="border-radius: 20px" class="cardUnic">
+    <form (ngSubmit)="antesDeNE()">
+      <ion-card-content>
+        <ion-item>
+          <ion-label floating>Empresa</ion-label>
+          <ion-select [(ngModel)]="empresa" (ngModelChange)="setEmpresa()" name="empresa" class="input-card">
+            <ion-option value="1">Unhesa</ion-option>
+            <ion-option value="2">Proquima</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Bodega</ion-label>
+          <ion-select [(ngModel)]="bodega" name="bodega" class="input-card">
+            <ion-option *ngFor="let bodeg of bodegas" text-wrap
+            value='{"CodigoBodega":"{{bodeg.id}}","NombreBodega":"{{bodeg.nombre}}"}'>{{bodeg.id}} - {{bodeg.nombre}}</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Unidad de medida</ion-label>
+          <ion-select [(ngModel)]="UDM" name="UDM" class="input-card">
+            <ion-option value="gramos">gramos</ion-option>
+            <ion-option value="Kg">Kg</ion-option>
+            <ion-option value="Unid.">Unid.</ion-option>
+            <ion-option value="N/D">N/D</ion-option>
+          </ion-select>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Código</ion-label>
+          <ion-input [(ngModel)]="codigo" (ngModelChange)="codigo = $event.toLocaleUpperCase()" name="codigo" type="text" class="input-card" (ngModelChange)='warning()'></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label floating>Descripción</ion-label>
+          <ion-input [(ngModel)]="descripcion" name="descripcion" type="text" class="input-card"></ion-input>
+        </ion-item>
+        
+        <!-- <button ion-button round full (click)="getPicture()" type="button">Toma una foto</button>
+        <img src="data:image/jpeg;base64,{{image}}" *ngIf="image" /> //por ahora cancelado -->
+
+        <br>
+
+        <button ion-button full round type="submit"
+        [disabled]="!UDM  || !descripcion || !bodega || !empresa || !codigo">Crear Etiqueta</button>
+      </ion-card-content>
+    </form>
+  </ion-card>
+</ion-content>

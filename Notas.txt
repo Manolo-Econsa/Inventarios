@@ -1,0 +1,72 @@
+// Ionic 3.20.0  // Node version 8.11.3
+
+//-------------------------Configuración de TOAST-----------------------------
+
+Para que en una de las paginas funcione correctamente, se tiene que ir al archivo
+.../node_modules/ionic-angular/components/toast/toast-component.js  y buscar
+
+	"if (activeElement) {
+        activeElement.blur();
+    }"
+	
+	actualmente se encuentra en la linea 40, ponlo en comentario y listo;
+
+//--------------------------------Config.xml----------------------------------
+
+Se agrego lo siguiente a la pag Config.xml:
+
+    <preference name="Fullscreen" value="true" />//reproduce la app en pantalla completa
+    <preference name="orientation" value="portrait" /> //evita el cambio de pantalla
+    <preference name="KeyboardResize" value="false" />	//no recuerdo :v
+    <preference name="KeyboardDisplayRequiresUserAction" value="false" /> //este permite hacer "focus" a un item sin interaccion del usuario
+
+//----------------------------QR escaner---------------------------------------
+
+// Se instalo la dependencia de "barcode-scanner"; se instala segun su tipo, en ionic.config.json
+
+npm i -s @ionic-native/barcode-scanner@4.20.0 //este en caso de ser tipo "ionic-angular"
+
+npm i -s @ionic-native/barcode-scanner@5.0.0-beta.24 //para tipo "angular"
+
+//junto a esto se instala lo siguiente para poder utilizar la camara como escaner
+
+ionic cordova plugin add phonegap-plugin-barcodescanner
+
+//para uso de la camara
+
+ionic cordova plugin add cordova-plugin-camera
+npm install @ionic-native/camera
+
+//--------------------------PHP------------------------------------------------
+
+Para las peticiones se realiza lo siguiente:
+-En las peticiones de usuario, empresa y estado, no se necesita el parametro "tabla", este sera ignorado.
+-En el resto de tablas mandar en el body del ts el parametro "tabla".
+-Para la tabla de hallazgos, este tiene que tener el formato "<nombre tabla>_hallazgo",
+-Nunca mandar fechas del tiempo actual, tiene un bug que al mandarlo a PHP le agrega 6 horas y al ingresar el dato
+	al servidor le agrega 6 más, falta por revisar.
+-Todas las peticiones de historial deben tener el formato <nombre tabla>_historial, ya que al hacer la peticion
+	manda un insert a, en este caso, "inventario_historial", siendo la variable "inventario"
+
+//---------------------------Extras--------------------------------------------
+
+ionic cordova plugin add cordova-plugin-ionic-keyboard //ignorar, no instalar
+
+//---------------------------Lista y QR-Scan-----------------------------------
+
+Se evita la creacion de otra vista al utilizar la vista de QR-Scan para el boton "ver" en Lista,
+Esto hace que en qrScan detecte que viene de otro lado y no muestre botones, inputs y cambie el titulo, por esa razon
+en  qr-scan.html existen muchos "*ngIf".
+
+//---------------------------Lazy Login---------------------------------------
+
+La aplicacion tiene inplementado lazy login de manera sencilla, para realizar lo mismo con alguna futura
+pagina nueva, al generarla genera un ts llamado ejemplo.module.ts, se agrega un "exports:[EjemploModule]" y las
+llamadas que se hagan tendran que ser string: this.navCtrl.push('EjemploModule');
+
+//---------------------------Lista--------------------------------------------
+
+El buscador de "Lista" esta en el header ya que la posicion "sticky" no funciona en ionic 3, al menos
+no en la version 3.20, este buscador posee un boton con el cual se puede buscar por medio de ID, descripcion y
+numero de bodega, en caso de querer agregar mas, se agrega el boton tipo fab y en la funcion "getItems" se agrega
+el filtro de busqueda.

@@ -1,0 +1,33 @@
+<ion-content padding class="default-home">
+  <h1 class="titulo">Aplicación de Inventario General</h1>
+
+  <div class="image" [hidden]="keyboard.isOpen()">
+    <img src="../../assets/imgs/Econsa.png">
+  </div>
+
+  <div class="login">   
+
+    <form (ngSubmit)="inicioSesion()" name="sesion">
+      <ion-item>
+        <ion-label floating color="dark">Usuario:</ion-label>
+        <ion-input [(ngModel)]="nombre" name="nombre" ></ion-input>
+      </ion-item>
+
+      <!-- <ion-item style="border-radius: 0px 0px 20px 20px !important; opacity: 0.8; border: 2px solid black; border-top: 0px"> -->
+      <ion-item>
+        <ion-label floating color="dark">Contraseña:</ion-label>
+        <ion-input type="password" [(ngModel)]="password" name="password"></ion-input>
+      </ion-item>
+
+      <!-- <ion-item>
+        <ion-label floating color="dark">Inventario</ion-label>
+        <ion-select [(ngModel)]="tabla" name="tabla" class="input-card">
+          <ion-option *ngFor="let tab of tablas" value="{{tab.idTabla}}">{{tab.tabla}}</ion-option>
+        </ion-select>
+      </ion-item> -->
+
+      <br>
+
+      <button round style="border: 2px solid black" ion-button type="submit" [disabled]="!nombre || !password" block>Iniciar sesión</button>   </form>
+  </div>
+</ion-content>

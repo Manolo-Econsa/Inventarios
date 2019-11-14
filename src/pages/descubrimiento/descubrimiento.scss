@@ -1,0 +1,13 @@
+page-descubrimiento {
+    .input-card{
+        border-bottom: 1px solid #dedede;
+    }
+
+    .default-home{
+        background-color: color($colors, new);
+        ion-card{
+            border: 5px solid black;
+            border-radius: 20px
+        }
+    }
+}
